@@ -1,0 +1,68 @@
+{
+  "name": "<%= _.slugify(_.humanize(appname)) %>",
+  "version": "0.0.0",
+  "main": "server/app.js",
+  "dependencies": {
+
+    "body-parser": "~1.15.2",
+    "composable-middleware": "~0.3.0",
+    "compression": "~1.6.2",
+    "connect-mongo": "~1.3.2",
+    "cookie-parser": "~1.4.3",
+    "errorhandler": "~1.4.3",
+    "express": "~4.14.0",
+    "express-jwt": "~5.1.0",
+    "hashids": "~1.1.1",
+    "express-session": "~1.14.1",
+    "jsonwebtoken": "~7.1.9",
+    "lodash": "~4.16.4",
+    "method-override": "~2.3.6",
+    "mongoose": "~4.6.3",
+    "morgan": "~1.7.0",
+    "pad": "~1.0.1",
+    "passport": "~0.3.2",
+    "passport-local": "~1.0.0",<% if(filters.facebookAuth) { %>
+    "passport-facebook": "latest",<% } %><% if(filters.twitterAuth) { %>
+    "passport-twitter": "latest",<% } %><% if(filters.googleAuth) { %>
+    "passport-google-oauth": "latest",<% } %>
+    "rest-api-errors": "~1.2.1",
+    "shortid": "~2.2.6",
+    "serve-favicon": "~2.3.0"<% if(filters.socketio) { %>,
+    "socket.io": "^1.0.6",
+    "socket.io-client": "^1.0.6",
+    "socketio-jwt": "~4.5.0"<% } %>
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-concurrent": "~0.5.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-newer": "~0.7.0",
+    "grunt-rev": "~0.1.0",
+    "grunt-env": "~0.4.1",
+    "grunt-nodemon": "~0.2.0",
+    "grunt-build-control": "DaftMonk/grunt-build-control",
+    "grunt-mocha-test": "~0.10.2",
+    "jit-grunt": "^0.5.0",
+    "time-grunt": "~0.3.1",
+    "grunt-express-server": "~0.4.17",
+    "grunt-open": "~0.2.3",
+    "open": "~0.0.4",
+    "connect-livereload": "~0.4.0",
+    "requirejs": "~2.1.11",
+    "supertest": "~0.11.0",
+    "should": "~3.3.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "node server/app.js",
+    "test": "grunt test",
+    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+  },
+  "private": true
+}
