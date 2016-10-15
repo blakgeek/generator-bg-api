@@ -59,7 +59,7 @@ Produces:
 
 ## Bower Components
 
-None.  This all backend baby.
+None.  This is all backend baby.
 
 ## Configuration
 Yeoman generated projects can be further tweaked according to your needs by modifying project files appropriately.
