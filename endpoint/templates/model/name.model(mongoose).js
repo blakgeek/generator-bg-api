@@ -5,10 +5,12 @@ var shortid = require('shortid');
 var Schema = mongoose.Schema;
 
 var <%= classedName %>Schema = new Schema({
-    _id: String,
-    name: String,
-    info: String,
-    active: Boolean
+    _id: String,<% if(secured) { %>
+    sharedWith: [String],<% } %>
+    createdDtm: {type: Date, default: Date.now},
+    createdBy: String,
+    lastModifiedDtm: Date,
+    lastModifiedBy: Date,
 }, {
     collection: '<%= _.underscored(name) %>s',
     versionKey: false
@@ -18,6 +20,13 @@ var <%= classedName %>Schema = new Schema({
     if (this.isNew && !this._id) {
         this._id = shortid();
     }
+    this.lastModifiedDtm = new Date();
+    next();
+});
+
+<%= classedName %>Schema.pre('update', function(next) {
+
+    this.lastModifiedDtm = new Date();
     next();
 });
 

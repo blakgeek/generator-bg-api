@@ -45,7 +45,7 @@ function isAuthenticated(required) {
 
             if(token) {
                 User.findOne({
-                    _id: token._id
+                    _id: token.id
                 }).lean().then(setUser).catch(next);
             } else {
                 next();

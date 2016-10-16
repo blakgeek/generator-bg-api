@@ -25,7 +25,10 @@ exports.get = function(req, resp, next) {
 
 // Creates a new <%= name %> in the DB.
 exports.create = function(req, resp, next) {
-    <%= classedName %>.create(req.body).then(<%= name %> => {
+    <%= classedName %>.create(_.merge(req.body, {
+        createdBy: req.user.username<% if(secured) { %>,
+        sharedWith: [req.user.username]<% } %>
+    })).then(<%= name %> => {
         resp.status(201).send(<%= name %>);
     }).catch(next);
 };
@@ -34,12 +37,18 @@ exports.create = function(req, resp, next) {
 exports.update = function(req, resp) {
 
     delete req.body._id;
+    body.lastModifiedBy = req.user.username;
     <%= classedName %>.findById(req.params.id).then(<%= name %> => {
 
         if(!<%= name %>) {
             throw new errors.NotFound('<%= _.underscored(name) %>_not_found')
         }
-        var updated = _.merge(<%= name %>, req.body);
+        <% if(secured) { %>
+            if(<%= name %>.createdBy !== req.user.username && <%= name %>.sharedWith.indexOf(req.user.username) === -1) {
+            throw new errors.Forbidden('<%= _.underscored(name) %>_access_denied')
+        }
+
+        <% } %>var updated = _.merge(<%= name %>, req.body);
         updated.save()
     }).then(<%= name %> => {
         resp.status(200).send(<%= name %>);
@@ -50,9 +59,13 @@ exports.update = function(req, resp) {
 exports.destroy = function(req, resp, next) {
     <%= classedName %>.findById(req.params.id).then(<%= name %> => {
         if(!<%= name %>) {
-            throw new errors.NotFound('<%= _.underscored(name) %>_not_found')
+            return;
+        }
+        <% if(secured) { %>
+        if(<%= name %>.createdBy !== req.user.username && <%= name %>.sharedWith.indexOf(req.user.username) === -1) {
+            throw new errors.Forbidden('<%= _.underscored(name) %>_access_denied')
         }
 
-        <%= name %>.remove();
+        <% } %><%= name %>.remove();
     }).then(() => resp.status(204).end()).catch(next);
 };

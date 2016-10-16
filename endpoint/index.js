@@ -30,6 +30,11 @@ Generator.prototype.askFor = function askFor() {
             name: 'route',
             message: 'What will the url of your endpoint to be?',
             default: base + name
+        }, {
+            name: 'secured',
+            message: 'Do you wanna secure it?',
+            type: 'confirm',
+            default: true
         }
     ];
 
@@ -39,6 +44,7 @@ Generator.prototype.askFor = function askFor() {
         }
 
         this.route = props.route;
+        this.secured = props.secured;
         done();
     }.bind(this));
 };
