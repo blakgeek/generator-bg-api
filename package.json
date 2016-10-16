@@ -1,6 +1,6 @@
 {
   "name": "generator-bg-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Yeoman generator for creating a restful api server using MongoDB, Express and Node",
   "keywords": [
     "yeoman-generator",
@@ -8,7 +8,9 @@
     "mongodb",
     "express",
     "scaffold",
-      "rest", "api", "backend"
+    "rest",
+    "api",
+    "backend"
   ],
   "homepage": "https://github.com/blakgeek/generator-bg-api",
   "bugs": "https://github.com/blakgeek/generator-bg-api/issues",
