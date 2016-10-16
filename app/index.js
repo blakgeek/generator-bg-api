@@ -7,7 +7,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var wiredep = require('wiredep');
 
-var AngularFullstackGenerator = yeoman.generators.Base.extend({
+var ApiServerGenerator = yeoman.generators.Base.extend({
 
     init: function () {
         this.argument('name', {type: String, required: false});
@@ -28,7 +28,7 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
 
     info: function () {
         this.log(this.yeoman);
-        this.log('Out of the box I create an AngularJS app with an Express server.\n');
+        this.log("Let's make a restful api server.\n");
     },
 
     checkForConfig: function () {
@@ -143,4 +143,4 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
     }
 });
 
-module.exports = AngularFullstackGenerator;
+module.exports = ApiServerGenerator;
