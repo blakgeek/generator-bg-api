@@ -60,19 +60,6 @@ Generator.prototype.registerEndpoint = function registerEndpoint() {
         };
         ngUtil.rewriteFile(routeConfig);
     }
-
-    if (this.filters.socketio) {
-        if (this.config.get('insertSockets')) {
-            var socketConfig = {
-                file: this.config.get('registerSocketsFile'),
-                needle: this.config.get('socketsNeedle'),
-                splicable: [
-                    "require(\'../api/" + this.name + '/' + this.name + ".socket\').register(socket);"
-                ]
-            };
-            ngUtil.rewriteFile(socketConfig);
-        }
-    }
 };
 
 Generator.prototype.createFiles = function createFiles() {

@@ -34,10 +34,10 @@ exports.create = function(req, resp, next) {
 };
 
 // Updates an existing <%= name %> in the DB.
-exports.update = function(req, resp) {
+exports.update = function(req, resp, next) {
 
     delete req.body._id;
-    body.lastModifiedBy = req.user.username;
+    req.body.lastModifiedBy = req.user.username;
     <%= classedName %>.findById(req.params.id).then(<%= name %> => {
 
         if(!<%= name %>) {
